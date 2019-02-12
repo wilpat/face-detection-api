@@ -32,7 +32,7 @@ app.get('/profile/:id', (req, res) =>{ user.getProfile(req, res, db) })
 
 app.put('/image', (req, res) => { image.identify(req, res, db) });
 
-app.put('/imageAPI', (req, res) => { image.handleApiCall(req, res) });
+app.post('/imageAPI', (req, res) => { image.handleApiCall(req, res) });
 
 
 app.listen(PORT, () =>{

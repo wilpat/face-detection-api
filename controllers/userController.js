@@ -62,7 +62,7 @@ const login = (req, res, db, bcrypt) =>{
 		});	
 	}).catch(err=>{
 		console.log(1)
-		res.status(400).json(err);
+		res.status(400).json("Error signing in");
 	})
 
 };
