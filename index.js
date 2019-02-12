@@ -21,7 +21,7 @@ app.use(cors());
 const PORT = process.env.PORT ? process.env.PORT : 3001;
 
 app.get('/', (req, res) =>{
-	res.json('')
+	res.json('Welcome')
 });
 
 app.post('/signin', (req, res) => { user.login(req, res, db, bcrypt) });
