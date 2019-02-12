@@ -4,13 +4,17 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');//USed to allow interaction across different origins in the browser
 const user = require('./controllers/userController');
 const image = require('./controllers/imageController');
+const DB_PASS = process.env.DB_PASS;
+const DB = process.env.DB;
+const CLARIFAI_KEY = process.env.CLARIFAI_KEY;
+
 var db = require('knex')({// Used for connecting to sql databases. It needs postgres cli to work too
   client: 'pg',
   connection: {
     host : '127.0.0.1',
     user : 'postgres',
-    password : 'entering01',
-    database : 'smart-brain'
+    password : DB_PASS,
+    database : DB
   }
 });
 
@@ -32,7 +36,7 @@ app.get('/profile/:id', (req, res) =>{ user.getProfile(req, res, db) })
 
 app.put('/image', (req, res) => { image.identify(req, res, db) });
 
-app.post('/imageAPI', (req, res) => { image.handleApiCall(req, res) });
+app.post('/imageAPI', (req, res) => { image.handleApiCall(req, res, CLARIFAI_KEY) });
 
 
 app.listen(PORT, () =>{
