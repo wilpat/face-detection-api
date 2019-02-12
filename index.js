@@ -4,17 +4,13 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');//USed to allow interaction across different origins in the browser
 const user = require('./controllers/userController');
 const image = require('./controllers/imageController');
-const DB_PASS = process.env.DB_PASS;
-const DB = process.env.DB;
 const CLARIFAI_KEY = process.env.CLARIFAI_KEY;
 
 var db = require('knex')({// Used for connecting to sql databases. It needs postgres cli to work too
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : DB_PASS,
-    database : DB
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
@@ -25,7 +21,7 @@ app.use(cors());
 const PORT = process.env.PORT ? process.env.PORT : 3001;
 
 app.get('/', (req, res) =>{
-	res.json(process.env.test)
+	res.json('Hey sorcerer, shoot me a spell!')
 });
 
 app.post('/signin', (req, res) => { user.login(req, res, db, bcrypt) });
