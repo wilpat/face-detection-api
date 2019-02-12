@@ -18,6 +18,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+const PORT = process.env.PORT ? process.env.PORT : 3000;
 
 app.get('/', (req, res) =>{
 	res.json('')
@@ -34,9 +35,6 @@ app.put('/image', (req, res) => { image.identify(req, res, db) });
 app.put('/imageAPI', (req, res) => { image.handleApiCall(req, res) });
 
 
-
-
-
-app.listen(3001, () =>{
-	console.log('Your app is listening on port 3001')
+app.listen(PORT, () =>{
+	console.log(`Your app is listening on port ${PORT}`)
 })
